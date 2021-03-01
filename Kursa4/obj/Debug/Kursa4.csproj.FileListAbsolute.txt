@@ -1,0 +1,10 @@
+C:\Users\Leviofan\source\repos\Kursa4\Kursa4\bin\Debug\Kursa4.exe.config
+C:\Users\Leviofan\source\repos\Kursa4\Kursa4\bin\Debug\Kursa4.exe
+C:\Users\Leviofan\source\repos\Kursa4\Kursa4\bin\Debug\Kursa4.pdb
+C:\Users\Leviofan\source\repos\Kursa4\Kursa4\obj\Debug\Kursa4.csprojAssemblyReference.cache
+C:\Users\Leviofan\source\repos\Kursa4\Kursa4\obj\Debug\Kursa4.Form1.resources
+C:\Users\Leviofan\source\repos\Kursa4\Kursa4\obj\Debug\Kursa4.Properties.Resources.resources
+C:\Users\Leviofan\source\repos\Kursa4\Kursa4\obj\Debug\Kursa4.csproj.GenerateResource.cache
+C:\Users\Leviofan\source\repos\Kursa4\Kursa4\obj\Debug\Kursa4.csproj.CoreCompileInputs.cache
+C:\Users\Leviofan\source\repos\Kursa4\Kursa4\obj\Debug\Kursa4.exe
+C:\Users\Leviofan\source\repos\Kursa4\Kursa4\obj\Debug\Kursa4.pdb
