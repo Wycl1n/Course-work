@@ -12,12 +12,27 @@ namespace Kursa4
 {
     public partial class Form1 : Form
     {
-        private byte[,] arrayOfNumbers = new byte[4, 4];
+        private Button[,] arrayOfNumbers = new Button[4, 4];
 
         public Form1()
         {
             InitializeComponent();
+            for (byte i = 0; i < 4; i++)
+                for (byte j = 0; j < 4; j++) 
+                {
+                    arrayOfNumbers[i, j] = new Button();
+                    arrayOfNumbers[i, j].Location = new Point(i * 60, 130+j * 60);
+                    arrayOfNumbers[i, j].Size = new Size(60, 60);
+                    arrayOfNumbers[i, j].MouseClick += new MouseEventHandler(S_MouseClick);
+                    this.Controls.Add(arrayOfNumbers[i, j]);
+                }
             StartGame();
+        }
+
+        void S_MouseClick(object sender, MouseEventArgs e)
+        {
+            int i = e.X / 60;
+            int j = e.Y / 60;
         }
 
         private void StartGame()
@@ -25,15 +40,21 @@ namespace Kursa4
             byte temp = 0;
             for (byte i = 0; i < 4; i++)
                 for (byte j = 0; j < 4; j++) 
-                    arrayOfNumbers[i, j] = temp++;
+                    arrayOfNumbers[j, i].Text = "" + temp++;
+            arrayOfNumbers[0, 0].Text = "";
 
             Random rand = new Random();
             for (byte i = 0; i < 4; i++)
                 for (byte j = 0; j < 4; j++)
-                    Swap(ref arrayOfNumbers[i, j], ref arrayOfNumbers[rand.Next() % 4, rand.Next() % 4]);
+                {
+                    string str = arrayOfNumbers[i, j].Text;
+                    Button randomButton = arrayOfNumbers[rand.Next() % 4, rand.Next() % 4];
+                    arrayOfNumbers[i, j].Text = randomButton.Text;
+                    randomButton.Text = str;
+                }
 
             // in future will be changed
-            button1.Text = arrayOfNumbers[0, 0] != 0 ? arrayOfNumbers[0, 0].ToString() : " ";
+            /*button1.Text = arrayOfNumbers[0, 0] != 0 ? arrayOfNumbers[0, 0].ToString() : " ";
             button2.Text = arrayOfNumbers[0, 1] != 0 ? arrayOfNumbers[0, 1].ToString() : " ";
             button3.Text = arrayOfNumbers[0, 2] != 0 ? arrayOfNumbers[0, 2].ToString() : " ";
             button4.Text = arrayOfNumbers[0, 3] != 0 ? arrayOfNumbers[0, 3].ToString() : " ";
@@ -48,94 +69,8 @@ namespace Kursa4
             button13.Text = arrayOfNumbers[3, 0] != 0 ? arrayOfNumbers[3, 0].ToString() : " ";
             button14.Text = arrayOfNumbers[3, 1] != 0 ? arrayOfNumbers[3, 1].ToString() : " ";
             button15.Text = arrayOfNumbers[3, 2] != 0 ? arrayOfNumbers[3, 2].ToString() : " ";
-            button16.Text = arrayOfNumbers[3, 3] != 0 ? arrayOfNumbers[3, 3].ToString() : " ";
+            button16.Text = arrayOfNumbers[3, 3] != 0 ? arrayOfNumbers[3, 3].ToString() : " ";*/
         }
 
-        private void Swap(ref byte a, ref byte b)
-        {
-            byte t = a;
-            a = b;
-            b = t;
-        }
-
-        private void button1_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button6_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button7_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button8_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button9_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button10_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button11_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button12_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button13_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button14_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button15_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button16_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 }
