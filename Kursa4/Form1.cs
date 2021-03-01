@@ -21,7 +21,7 @@ namespace Kursa4
                 for (byte j = 0; j < 4; j++) 
                 {
                     arrayOfNumbers[i, j] = new Button();
-                    arrayOfNumbers[i, j].Location = new Point(i * 60, 130+j * 60);
+                    arrayOfNumbers[i, j].Location = new Point(i * 60, 130 + j * 60);
                     arrayOfNumbers[i, j].Size = new Size(60, 60);
                     arrayOfNumbers[i, j].MouseClick += new MouseEventHandler(S_MouseClick);
                     this.Controls.Add(arrayOfNumbers[i, j]);
@@ -31,8 +31,17 @@ namespace Kursa4
 
         void S_MouseClick(object sender, MouseEventArgs e)
         {
-            int i = e.X / 60;
-            int j = e.Y / 60;
+            for (int a = 0; a < 4; a++)
+                for (int b = 0; b < 4; b++)
+                    if (arrayOfNumbers[b, a] == sender)
+                        try
+                        {
+                            if (arrayOfNumbers[b + 1, a].Text == "") Swap(ref arrayOfNumbers[b + 1, a], ref arrayOfNumbers[b, a]);
+                            else if (arrayOfNumbers[b - 1, a].Text == "") Swap(ref arrayOfNumbers[b - 1, a], ref arrayOfNumbers[b, a]);
+                            else if (arrayOfNumbers[b, a + 1].Text == "") Swap(ref arrayOfNumbers[b, a + 1], ref arrayOfNumbers[b, a]);
+                            else if (arrayOfNumbers[b, a - 1].Text == "") Swap(ref arrayOfNumbers[b, a - 1], ref arrayOfNumbers[b, a]);
+                        }
+                        catch { }
         }
 
         private void StartGame()
@@ -52,24 +61,13 @@ namespace Kursa4
                     arrayOfNumbers[i, j].Text = randomButton.Text;
                     randomButton.Text = str;
                 }
+        }
 
-            // in future will be changed
-            /*button1.Text = arrayOfNumbers[0, 0] != 0 ? arrayOfNumbers[0, 0].ToString() : " ";
-            button2.Text = arrayOfNumbers[0, 1] != 0 ? arrayOfNumbers[0, 1].ToString() : " ";
-            button3.Text = arrayOfNumbers[0, 2] != 0 ? arrayOfNumbers[0, 2].ToString() : " ";
-            button4.Text = arrayOfNumbers[0, 3] != 0 ? arrayOfNumbers[0, 3].ToString() : " ";
-            button5.Text = arrayOfNumbers[1, 0] != 0 ? arrayOfNumbers[1, 0].ToString() : " ";
-            button6.Text = arrayOfNumbers[1, 1] != 0 ? arrayOfNumbers[1, 1].ToString() : " ";
-            button7.Text = arrayOfNumbers[1, 2] != 0 ? arrayOfNumbers[1, 2].ToString() : " ";
-            button8.Text = arrayOfNumbers[1, 3] != 0 ? arrayOfNumbers[1, 3].ToString() : " ";
-            button9.Text = arrayOfNumbers[2, 0] != 0 ? arrayOfNumbers[2, 0].ToString() : " ";
-            button10.Text = arrayOfNumbers[2, 1] != 0 ? arrayOfNumbers[2, 1].ToString() : " ";
-            button11.Text = arrayOfNumbers[2, 2] != 0 ? arrayOfNumbers[2, 2].ToString() : " ";
-            button12.Text = arrayOfNumbers[2, 3] != 0 ? arrayOfNumbers[2, 3].ToString() : " ";
-            button13.Text = arrayOfNumbers[3, 0] != 0 ? arrayOfNumbers[3, 0].ToString() : " ";
-            button14.Text = arrayOfNumbers[3, 1] != 0 ? arrayOfNumbers[3, 1].ToString() : " ";
-            button15.Text = arrayOfNumbers[3, 2] != 0 ? arrayOfNumbers[3, 2].ToString() : " ";
-            button16.Text = arrayOfNumbers[3, 3] != 0 ? arrayOfNumbers[3, 3].ToString() : " ";*/
+        private void Swap(ref Button a, ref Button b)
+        {
+            string temp = a.Text;
+            a.Text = b.Text;
+            b.Text = temp;
         }
 
     }
