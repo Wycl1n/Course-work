@@ -13,42 +13,113 @@ namespace Kursa4
     public partial class Form1 : Form
     {
         private Button[,] arrayOfNumbers = new Button[4, 4];
+        private Button restartButton = new Button();
+        private Label label = new Label();
+        private bool isGameEnded;
 
         public Form1()
         {
             InitializeComponent();
+            label.Location = new Point(30, 30);
+            label.Size = new Size(200, 50);
+            label.Font = new Font("Arial", 20);
+            this.Controls.Add(label);
+            restartButton.Location = new Point(27, 80);
+            restartButton.Size = new Size(190, 50);
+            restartButton.Text = "Restart";
+            restartButton.MouseClick += new MouseEventHandler(StartGame);
+            this.Controls.Add(restartButton);
+
             for (byte i = 0; i < 4; i++)
                 for (byte j = 0; j < 4; j++) 
                 {
                     arrayOfNumbers[i, j] = new Button();
-                    arrayOfNumbers[i, j].Location = new Point(i * 60, 130 + j * 60);
+                    arrayOfNumbers[i, j].Location = new Point(i * 60, 135 + j * 60);
                     arrayOfNumbers[i, j].Size = new Size(60, 60);
                     arrayOfNumbers[i, j].MouseClick += new MouseEventHandler(S_MouseClick);
                     this.Controls.Add(arrayOfNumbers[i, j]);
                 }
+
             StartGame();
         }
 
         void S_MouseClick(object sender, MouseEventArgs e)
         {
-            for (int a = 0; a < 4; a++)
-                for (int b = 0; b < 4; b++)
-                    if (arrayOfNumbers[b, a] == sender)
-                        try
+            if (!isGameEnded)
+            {
+                for (int a = 0; a < 4; a++)
+                    for (int b = 0; b < 4; b++)
+                        if (arrayOfNumbers[b, a] == sender)
                         {
-                            if (arrayOfNumbers[b + 1, a].Text == "") Swap(ref arrayOfNumbers[b + 1, a], ref arrayOfNumbers[b, a]);
-                            else if (arrayOfNumbers[b - 1, a].Text == "") Swap(ref arrayOfNumbers[b - 1, a], ref arrayOfNumbers[b, a]);
-                            else if (arrayOfNumbers[b, a + 1].Text == "") Swap(ref arrayOfNumbers[b, a + 1], ref arrayOfNumbers[b, a]);
-                            else if (arrayOfNumbers[b, a - 1].Text == "") Swap(ref arrayOfNumbers[b, a - 1], ref arrayOfNumbers[b, a]);
+                            try
+                            {
+                                if (arrayOfNumbers[b + 1, a].Text == "")
+                                    Swap(ref arrayOfNumbers[b + 1, a], ref arrayOfNumbers[b, a]);
+                            }
+                            catch { }
+                            try
+                            {
+                                if (arrayOfNumbers[b - 1, a].Text == "")
+                                    Swap(ref arrayOfNumbers[b - 1, a], ref arrayOfNumbers[b, a]);
+                            }
+                            catch { }
+                            try
+                            {
+                                if (arrayOfNumbers[b, a + 1].Text == "")
+                                    Swap(ref arrayOfNumbers[b, a + 1], ref arrayOfNumbers[b, a]);
+                            }
+                            catch { }
+                            try
+                            {
+                                if (arrayOfNumbers[b, a - 1].Text == "")
+                                    Swap(ref arrayOfNumbers[b, a - 1], ref arrayOfNumbers[b, a]);
+                            }
+                            catch { }
                         }
-                        catch { }
+
+                /*byte temp = 1;
+                for (int j = 0; j < 4; j++)
+                    for (int i = 0; i < 4; i++)
+                        if (i != 3 && j != 3)
+                            if (arrayOfNumbers[i, j].Text != "" + temp++)
+                                return;
+
+                label.Text = "Success";*/
+
+                if (arrayOfNumbers[0, 0].Text == "1" &&
+                    arrayOfNumbers[1, 0].Text == "2" &&
+                    arrayOfNumbers[2, 0].Text == "3" &&
+                    arrayOfNumbers[3, 0].Text == "4" &&
+                    arrayOfNumbers[0, 1].Text == "5" &&
+                    arrayOfNumbers[1, 1].Text == "6" &&
+                    arrayOfNumbers[2, 1].Text == "7" &&
+                    arrayOfNumbers[3, 1].Text == "8" &&
+                    arrayOfNumbers[0, 2].Text == "9" &&
+                    arrayOfNumbers[1, 2].Text == "10" &&
+                    arrayOfNumbers[2, 2].Text == "11" &&
+                    arrayOfNumbers[3, 2].Text == "12" &&
+                    arrayOfNumbers[0, 3].Text == "13" &&
+                    arrayOfNumbers[1, 3].Text == "14" &&
+                    arrayOfNumbers[2, 3].Text == "15" &&
+                    arrayOfNumbers[3, 3].Text == "")
+                {
+                    label.Text = "Success";
+                    isGameEnded = true;
+                }
+            }
         }
 
+        void StartGame(object sender, MouseEventArgs e)
+        {
+            StartGame();
+        }
         private void StartGame()
         {
-            byte temp = 0;
+            isGameEnded = false;
+            label.Text = "Game is going";
+            /*byte temp = 0;
             for (byte i = 0; i < 4; i++)
-                for (byte j = 0; j < 4; j++) 
+                for (byte j = 0; j < 4; j++)
                     arrayOfNumbers[j, i].Text = "" + temp++;
             arrayOfNumbers[0, 0].Text = "";
 
@@ -60,7 +131,12 @@ namespace Kursa4
                     Button randomButton = arrayOfNumbers[rand.Next() % 4, rand.Next() % 4];
                     arrayOfNumbers[i, j].Text = randomButton.Text;
                     randomButton.Text = str;
-                }
+                }*/
+            byte temp = 1;
+            for (byte i = 0; i < 4; i++)
+                for (byte j = 0; j < 4; j++)
+                    arrayOfNumbers[j, i].Text = "" + temp++;
+            arrayOfNumbers[3, 3].Text = "";
         }
 
         private void Swap(ref Button a, ref Button b)
