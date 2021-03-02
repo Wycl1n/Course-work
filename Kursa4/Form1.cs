@@ -117,7 +117,7 @@ namespace Kursa4
         {
             isGameEnded = false;
             label.Text = "Game is going";
-            /*byte temp = 0;
+            byte temp = 0;
             for (byte i = 0; i < 4; i++)
                 for (byte j = 0; j < 4; j++)
                     arrayOfNumbers[j, i].Text = "" + temp++;
@@ -131,12 +131,12 @@ namespace Kursa4
                     Button randomButton = arrayOfNumbers[rand.Next() % 4, rand.Next() % 4];
                     arrayOfNumbers[i, j].Text = randomButton.Text;
                     randomButton.Text = str;
-                }*/
-            byte temp = 1;
+                }
+           /* byte temp = 1;
             for (byte i = 0; i < 4; i++)
                 for (byte j = 0; j < 4; j++)
                     arrayOfNumbers[j, i].Text = "" + temp++;
-            arrayOfNumbers[3, 3].Text = "";
+            arrayOfNumbers[3, 3].Text = "";*/
         }
 
         private void Swap(ref Button a, ref Button b)
