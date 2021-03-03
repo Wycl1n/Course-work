@@ -132,7 +132,7 @@ namespace Kursa4
                     arrayOfNumbers[i, j].Text = randomButton.Text;
                     randomButton.Text = str;
                 }
-           /* byte temp = 1;
+            /*byte temp = 1;
             for (byte i = 0; i < 4; i++)
                 for (byte j = 0; j < 4; j++)
                     arrayOfNumbers[j, i].Text = "" + temp++;
