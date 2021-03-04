@@ -77,15 +77,6 @@ namespace Kursa4
                             catch { }
                         }
 
-                /*byte temp = 1;
-                for (int j = 0; j < 4; j++)
-                    for (int i = 0; i < 4; i++)
-                        if (i != 3 && j != 3)
-                            if (arrayOfNumbers[i, j].Text != "" + temp++)
-                                return;
-
-                label.Text = "Success";*/
-
                 if (arrayOfNumbers[0, 0].Text == "1" &&
                     arrayOfNumbers[1, 0].Text == "2" &&
                     arrayOfNumbers[2, 0].Text == "3" &&
@@ -120,25 +111,48 @@ namespace Kursa4
             byte temp = 0;
             for (byte i = 0; i < 4; i++)
                 for (byte j = 0; j < 4; j++)
-                    arrayOfNumbers[j, i].Text = "" + temp++;
-            arrayOfNumbers[0, 0].Text = "";
+                    arrayOfNumbers[j, i].Text = "" + ++temp;
+            arrayOfNumbers[3, 3].Text = "";
 
             Random rand = new Random();
-            for (byte i = 0; i < 4; i++)
-                for (byte j = 0; j < 4; j++)
-                {
-                    string str = arrayOfNumbers[i, j].Text;
-                    Button randomButton = arrayOfNumbers[rand.Next() % 4, rand.Next() % 4];
-                    arrayOfNumbers[i, j].Text = randomButton.Text;
-                    randomButton.Text = str;
-                }
-            /*byte temp = 1;
-            for (byte i = 0; i < 4; i++)
-                for (byte j = 0; j < 4; j++)
-                    arrayOfNumbers[j, i].Text = "" + temp++;
-            arrayOfNumbers[3, 3].Text = "";*/
+            do
+            {
+                for (byte i = 0; i < 4; i++)
+                    for (byte j = 0; j < 4; j++)
+                    {
+                        Button randomButton = arrayOfNumbers[rand.Next() % 4, rand.Next() % 4];
+                        string str = arrayOfNumbers[i, j].Text;
+                        arrayOfNumbers[i, j].Text = randomButton.Text;
+                        randomButton.Text = str;
+                    }
+            }
+            while (!isSolvable());
+            temp = 0;
         }
 
+        public bool isSolvable()
+        {
+            int count = 0;
+
+            int[] arr = new int[16];
+            int i_arr = 0;
+            for(int i=0;i<4;i++)
+                for(int j=0;j<4;j++)
+                    arr[i_arr++] = arrayOfNumbers[j, i].Text == "" 
+                                   ? 0
+                                   : Convert.ToInt32(arrayOfNumbers[j, i].Text);
+
+            for (int i = 0; i < 16; i++)
+                for (int j = 0; j < i; j++) 
+                    if (arr[i] < arr[j]) 
+                        count++;
+
+            for (int i = 0; i < 16; i++)
+                if (arr[i] == 0)
+                    count += 1 + i / 4;
+
+            return count%2!=0;
+        }
         private void Swap(ref Button a, ref Button b)
         {
             string temp = a.Text;
